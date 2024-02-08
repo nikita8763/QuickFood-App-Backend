@@ -17,10 +17,10 @@ public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long restaurantId;
+    private Integer restaurantId;
     private String restaurantName;
 
-    @OneToMany(mappedBy = "restaurant")
-    private List<FoodItem> menu;
+//    @OneToMany(mappedBy = "restaurant")
+//    private List<FoodItem> menu;
 
 }

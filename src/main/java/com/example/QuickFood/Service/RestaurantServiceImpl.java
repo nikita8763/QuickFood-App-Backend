@@ -11,21 +11,47 @@ import java.util.Optional;
 public class RestaurantServiceImpl implements RestaurantService{
 
     @Autowired
-    private RestaurantRepository restaurantRepository;
+    RestaurantRepository restaurantRepository;
+
+//    @Override
+//    public Restaurant addRestaurant(Restaurant restaurant) {
+////        Optional<Restaurant> opt = restaurantRepository.findById(restaurant.getRestaurantId());
+////        if(opt.isPresent()) {
+////            return null;
+////        }
+////        else {
+////            Restaurant restaurant = opt.get();
+//            return restaurantRepository.save(restaurant);
+////        }
+//    }
 
     @Override
-    public Restaurant addRestaurant(Restaurant restaurant) {
-//        return RestaurantRepository.save(restaurant);
+    public Restaurant addRestaurant(Restaurant restaurant){
+        return restaurantRepository.save(restaurant);
     }
 
     @Override
     public Restaurant updateRestaurant(Restaurant restaurant) {
-        return null;
+        Optional<Restaurant> opt = restaurantRepository.findById(restaurant.getRestaurantId());
+        if(opt.isPresent()){
+            return restaurantRepository.save(restaurant);
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
     public Restaurant removeRestaurant(Integer restaurantId) {
-        return null;
+        Optional<Restaurant> opt = restaurantRepository.findById(restaurantId);
+        if(opt.isPresent()){
+            Restaurant restaurant = opt.get();
+            restaurantRepository.delete(restaurant);
+            return restaurant;
+        }
+        else{
+            return null;
+        }
     }
 
     @Override
@@ -35,5 +61,9 @@ public class RestaurantServiceImpl implements RestaurantService{
             Restaurant restaurant = opt.get();
             return restaurant;
         }
+        else {
+            return null;
+        }
     }
+
 }
